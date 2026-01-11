@@ -9,37 +9,37 @@ from flcore.clients.clientbase import Client
 
 def parse_args():
     """解析参数：包含模型、数据、运行相关配置"""
-    parser = argparse.ArgumentParser(description="独立WER测试程序（提取自原有代码核心逻辑）")
+    parser = argparse.ArgumentParser(description="独立WER测试程序")
     # -------------------------- 1. 模型相关 --------------------------
     parser.add_argument("-model_path", "--model_path", type=str,
                         default=r"D:",
-                        help="最终聚合模型的权重路径（如FedAvg_server.pt）")
+                        help="最终聚合模型的权重路径")
     parser.add_argument("-mel_dim", "--mel_dim", type=int, default=80,
-                        help="梅尔频谱维度（训练时设为80，不可修改）")
+                        help="梅尔频谱维度")
     parser.add_argument("-hidden_dim", "--hidden_dim", type=int, default=256,
-                        help="模型隐藏层维度（与训练时一致）")
+                        help="模型隐藏层维度")
     parser.add_argument("-vocab_size", "--vocab_size", type=int, default=941,
-                        help="词汇表大小（含<blank>，从dict.txt读取的实际大小）")
+                        help="词汇表大小")
 
 
     # -------------------------- 2. 数据相关 --------------------------
     parser.add_argument("-dataset", "--dataset", type=str, default="THCHS30_ASR",
-                        help="数据集名称（需与data_utils中读取的数据集名匹配）")
+                        help="数据集名称")
     parser.add_argument("-dict_path", "--dict_path", type=str,
                         default=r"D:",
-                        help="词汇表路径（与训练时使用的dict.txt一致）")
+                        help="词汇表路径")
     parser.add_argument("-test_client_ids", "--test_client_ids", type=str, default="all",
-                        help="测试的客户端ID（如'0,1,2'或'all'表示所有客户端）")
+                        help="测试的客户端ID")
     parser.add_argument("-max_mel_len", "--max_mel_len", type=int, default=1600,
-                        help="梅尔特征最大长度（与data_utils中process_asr_data配置一致）")
+                        help="梅尔特征最大长度")
     parser.add_argument("-max_text_len", "--max_text_len", type=int, default=100,
-                        help="文本最大长度（与data_utils中process_asr_data配置一致）")
+                        help="文本最大长度")
 
     # -------------------------- 3. 运行相关 --------------------------
     parser.add_argument("-device", "--device", type=str, default="cuda", choices=["cpu", "cuda"],
-                        help="计算设备（优先GPU，无GPU自动切CPU）")
+                        help="计算设备")
     parser.add_argument("-batch_size", "--batch_size", type=int, default=10,
-                        help="测试批次大小（根据显存调整，不影响结果）")
+                        help="测试批次大小")
     return parser.parse_args()
 
 
