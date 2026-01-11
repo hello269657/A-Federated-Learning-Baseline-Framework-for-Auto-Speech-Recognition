@@ -106,7 +106,7 @@ def load_final_model(args):
         print(f"加载最终模型成功：{args.model_path}（运行设备：{args.device}）")
         return model
     except Exception as e:
-        print(f"❌ 模型加载失败：{str(e)}")
+        print(f" 模型加载失败：{str(e)}")
         print(f"请检查：1. 模型路径是否正确；2. 模型参数（mel_dim/hidden_dim/vocab_size）是否与训练一致")
         return None
 
@@ -117,7 +117,7 @@ def test_model_wer(args, model, wer_toolkit):
         test_client_ids = list(range(10))  # 默认总客户端数为10
     else:
         test_client_ids = [int(cid.strip()) for cid in args.test_client_ids.split(",")]
-    print(f"\n📌 测试客户端列表：{test_client_ids}（共{len(test_client_ids)}个客户端）")
+    print(f"\n 测试客户端列表：{test_client_ids}（共{len(test_client_ids)}个客户端）")
 
     # 2. 遍历客户端测试集，计算总WER
     total_wer = 0.0
@@ -206,7 +206,7 @@ def test_model_wer(args, model, wer_toolkit):
 
     # 3. 计算整体平均WER并输出汇总
     if total_samples == 0:
-        print("\n❌ 无有效测试样本，无法计算整体WER")
+        print("\n 无有效测试样本，无法计算整体WER")
         return
 
     overall_avg_wer = total_wer / total_samples
