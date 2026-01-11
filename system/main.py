@@ -72,13 +72,13 @@ if __name__ == "__main__":
     parser.add_argument("-num_lstm", "--num_lstm_layers", type=int, default=3, help="LSTM层数")
     parser.add_argument("-max_mel_len", "--max_mel_len", type=int, default=1600, help="梅尔最大长度")
     parser.add_argument("-max_text_len", "--max_text_len", type=int, default=100, help="文本最大长度")
-    parser.add_argument("-dict_path", "--dict_path", type=str, default=r"D:", help="词汇表dict.txt路径")  # 新增
+    parser.add_argument("-dict_path", "--dict_path", type=str, default=r"D:", help="词汇表dict.txt路径")  
 
     # 2. 联邦学习参数
     parser.add_argument("-data", "--dataset", type=str, default="THCHS30_ASR", help="数据集名称")
-    parser.add_argument("-m", "--model", type=str, default="ASRModel", help="模型标识（无需修改）")
+    parser.add_argument("-m", "--model", type=str, default="ASRModel", help="模型标识")
     parser.add_argument("-lr", "--local_learning_rate", type=float, default=0.003, help="客户端学习率")
-    parser.add_argument("-go", "--goal", type=str, default="test", help="实验目标（用于结果保存）")
+    parser.add_argument("-go", "--goal", type=str, default="test", help="实验目标")
     parser.add_argument("-dev", "--device", type=str, default="cuda", choices=["cpu", "cuda"], help="计算设备")
     parser.add_argument("-did", "--device_id", type=str, default="0", help="GPU设备ID（如0,1）")
     parser.add_argument("-lbs", "--batch_size", type=int, default=10, help="客户端批次大小")
