@@ -47,7 +47,7 @@ def init_wer_tools(dict_path):
     """初始化WER计算必需的工具：词汇表映射、解码函数"""
     # 加载词汇表
     _, CHAR_TO_ID, ID_TO_CHAR = load_vocab(dict_path)
-    print(f"✅ 加载词汇表成功：共{len(ID_TO_CHAR)}个符号（<blank> ID=0）")
+    print(f"加载词汇表成功：共{len(ID_TO_CHAR)}个符号（<blank> ID=0）")
 
     class WERToolkit:
         @staticmethod
@@ -103,7 +103,7 @@ def load_final_model(args):
             state_dict = torch.load(args.model_path, map_location=torch.device("cpu"))
         model.load_state_dict(state_dict)
         model.eval()  # 切换到评估模式
-        print(f"✅ 加载最终模型成功：{args.model_path}（运行设备：{args.device}）")
+        print(f"加载最终模型成功：{args.model_path}（运行设备：{args.device}）")
         return model
     except Exception as e:
         print(f"❌ 模型加载失败：{str(e)}")
@@ -137,10 +137,10 @@ def test_model_wer(args, model, wer_toolkit):
                     dict_path=args.dict_path
                 )
                 if len(test_data) == 0:
-                    print(f"⚠️  客户端{client_id}：无测试数据，跳过")
+                    print(f"客户端{client_id}：无测试数据，跳过")
                     continue
             except Exception as e:
-                print(f"⚠️  客户端{client_id}：数据读取失败（{str(e)}），跳过")
+                print(f"客户端{client_id}：数据读取失败（{str(e)}），跳过")
                 continue
 
             # 构建测试数据加载器
@@ -202,7 +202,7 @@ def test_model_wer(args, model, wer_toolkit):
             total_wer += client_wer
             total_samples += client_sample_cnt
 
-            print(f"✅ 客户端{client_id}：测试样本数={client_sample_cnt:3d}，平均WER={avg_client_wer:.4f}")
+            print(f"客户端{client_id}：测试样本数={client_sample_cnt:3d}，平均WER={avg_client_wer:.4f}")
 
     # 3. 计算整体平均WER并输出汇总
     if total_samples == 0:
@@ -211,7 +211,7 @@ def test_model_wer(args, model, wer_toolkit):
 
     overall_avg_wer = total_wer / total_samples
     print("\n" + "=" * 80)
-    print(f"📊 最终模型WER测试结果汇总")
+    print(f"最终模型WER测试结果汇总")
     print(f"=" * 80)
     print(f"测试客户端数量：{len(test_client_ids)}")
     print(f"总测试样本数量：{total_samples}")
@@ -228,7 +228,7 @@ if __name__ == "__main__":
 
     # 2. 适配设备
     if args.device == "cuda" and not torch.cuda.is_available():
-        print("⚠️  未检测到可用CUDA设备，自动切换到CPU运行")
+        print("未检测到可用CUDA设备，自动切换到CPU运行")
         args.device = "cpu"
 
     # 3. 初始化WER计算工具
